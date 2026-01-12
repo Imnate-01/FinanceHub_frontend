@@ -1,0 +1,7 @@
+target/
+*.jar
+*.class
+.vscode/
+gcp-credentials.json
+node_modules/
+.env
