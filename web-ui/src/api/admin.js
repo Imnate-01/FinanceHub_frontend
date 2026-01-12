@@ -1,21 +1,19 @@
-// src/api/admin.js
 import { apiFetch } from "./http";
 
 export const adminApi = {
-  // ✅ Balances por usuario (users + accounts)
+  // ✅ Correcto: Coincide con server.createContext("/admin/users", ...)
   getUsers: () => apiFetch("admin", "/admin/users"),
 
-  // ✅ Total de dinero del sistema
+  // ✅ Correcto: Coincide con server.createContext("/admin/total-money", ...)
   getTotalMoney: () => apiFetch("admin", "/admin/total-money"),
 
-  // ✅ Métricas para gráficas (count + amount por día)
-  // (según tu AccountServer: /admin/metrics/transactions)
+  // ✅ Correcto: Coincide con server.createContext("/admin/metrics/transactions", ...)
   getMetricsTransactions: () => apiFetch("admin", "/admin/metrics/transactions"),
 
-  // ✅ Auditoría completa (opcional pero útil)
-  getAudit: () => apiFetch("admin", "/admin/audit"),
+  // ⚠️ CORREGIDO: En Java no existe "/admin/audit", usamos "/admin/logs"
+  getAudit: () => apiFetch("admin", "/admin/logs"),
 
-  // ✅ Logs por usuario (por CURP)
+  // ✅ Correcto: Usa el mismo endpoint pero con filtro
   getLogsByCurp: (curp) =>
     apiFetch("admin", `/admin/logs?curp=${encodeURIComponent(curp)}`),
 };
